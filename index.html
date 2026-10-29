@@ -2,197 +2,57 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="theme-color" content="#07111e">
-<title>XR FUSION EDU — Laboratorio inmersivo</title>
-<script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
-<script src="https://aframe.io/releases/1.6.0/aframe.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>XR Fusion Edu - PC</title>
+<script type="importmap">
+{ "imports": { "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js" } }
+</script>
+<script type="module" src="https://cdn.jsdelivr.net/npm/@google/model-viewer@3.5.0/dist/model-viewer.min.js"></script>
 <style>
-:root{--bg:#050a12;--panel:#0c1725;--panel2:#101f30;--line:#20364b;--text:#eaf5ff;--muted:#9bb0c6;--blue:#39b8ff;--green:#55ffb0;--orange:#ff9e43;--danger:#ff6b7b}
-*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:radial-gradient(ellipse at 10% 0%,#102b43 0,transparent 38%),radial-gradient(ellipse at 95% 18%,#132a22 0,transparent 28%),var(--bg);color:var(--text);font:15px/1.5 system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif}button,input,select,textarea{font:inherit}button{cursor:pointer}a{color:var(--blue)}.wrap{max-width:1250px;margin:auto;padding:22px}.top{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;padding:12px 0 24px}.brand{display:flex;align-items:center;gap:12px}.logo{width:48px;height:48px;border-radius:14px;background:linear-gradient(135deg,var(--blue),var(--green));display:grid;place-items:center;color:#06111c;font-weight:1000;font-size:18px;box-shadow:0 0 28px #39b8ff38}.brand h1{font-size:clamp(20px,3vw,29px);line-height:1.1;margin:0;letter-spacing:.04em}.brand p{margin:5px 0 0;color:var(--muted);font-size:12px;letter-spacing:.16em;text-transform:uppercase}.status{border:1px solid var(--line);background:#0b1825;border-radius:999px;padding:8px 13px;color:var(--green);font-size:12px}.hero{display:grid;grid-template-columns:1.15fr .85fr;gap:22px;align-items:stretch}.hero-copy,.hero-art,.panel{border:1px solid var(--line);background:linear-gradient(145deg,#0e1c2bdf,#08111cF2);border-radius:22px;box-shadow:0 18px 50px #0004}.hero-copy{padding:clamp(22px,4vw,42px);position:relative;overflow:hidden}.eyebrow{color:var(--green);font-size:12px;letter-spacing:.18em;font-weight:800;text-transform:uppercase}.hero h2{font-size:clamp(32px,5vw,58px);line-height:1.02;margin:14px 0}.hero h2 span{color:var(--blue)}.hero-copy>p{color:var(--muted);max-width:650px}.actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:24px}.btn{border:1px solid #29455d;background:#12253a;color:var(--text);padding:11px 15px;border-radius:11px;font-weight:750;transition:.18s}.btn:hover{transform:translateY(-1px);border-color:var(--blue)}.btn.primary{background:linear-gradient(100deg,var(--blue),var(--green));border:0;color:#04111a}.btn.orange{border-color:#80552e;color:#ffc18a;background:#24190f}.hero-art{min-height:290px;display:grid;place-items:center;overflow:hidden;position:relative;background:radial-gradient(circle at 50% 50%,#153c4a 0,#0a1724 50%,#07101a 100%)}.orb{width:min(60%,230px);aspect-ratio:1;border-radius:50%;border:1px solid #55ffb077;background:radial-gradient(circle at 32% 28%,#4bd9ffb8,#1d4c6a55 36%,#0b1420 70%);box-shadow:0 0 35px #39b8ff4a,inset 0 0 35px #55ffb044;position:relative;animation:float 6s ease-in-out infinite}.orb:before,.orb:after{content:"";position:absolute;inset:-20%;border:1px solid #39b8ff88;border-radius:50%;transform:rotate(-25deg) scaleY(.36)}.orb:after{transform:rotate(48deg) scaleY(.45);border-color:#ff9e4388}.orb-label{position:absolute;bottom:22px;left:20px;right:20px;text-align:center;color:#b5d6ed;font-size:12px;letter-spacing:.15em;text-transform:uppercase}@keyframes float{50%{transform:translateY(-10px) rotate(4deg)}}.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:18px 0 30px}.stat{border:1px solid var(--line);background:#0a1521;border-radius:15px;padding:15px}.stat strong{display:block;font-size:22px;color:var(--green)}.stat span{color:var(--muted);font-size:12px}.section-head{display:flex;justify-content:space-between;gap:12px;align-items:end;flex-wrap:wrap;margin:30px 0 14px}.section-head h2{margin:0;font-size:24px}.section-head p{margin:3px 0 0;color:var(--muted)}.grid{display:grid;grid-template-columns:repeat(12,1fr);gap:16px}.panel{padding:20px;min-width:0}.viewer-panel{grid-column:span 8}.side-panel{grid-column:span 4}.full{grid-column:1/-1}.panel h3{margin:0 0 8px;font-size:18px}.muted{color:var(--muted)}.small{font-size:12px}.model-box{position:relative;background:radial-gradient(ellipse,#122b3b,#060c14 70%);border:1px solid #20364b;border-radius:15px;overflow:hidden;min-height:360px}.model-box model-viewer{width:100%;height:390px;background:transparent;--poster-color:transparent}.placeholder{position:absolute;inset:0;display:grid;place-items:center;text-align:center;padding:22px;pointer-events:none;color:#b5c8d8}.placeholder .cube{font-size:54px;color:var(--blue);filter:drop-shadow(0 0 18px #39b8ff88)}.viewer-controls{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}.file-input{display:none}.field{display:flex;flex-direction:column;gap:6px;margin:12px 0}.field label{font-size:12px;color:#b8cde0;font-weight:700}.field input,.field textarea,.field select{width:100%;border:1px solid #284056;background:#07111c;color:var(--text);border-radius:10px;padding:11px;outline:none}.field input:focus,.field textarea:focus{border-color:var(--blue)}.field textarea{min-height:90px;resize:vertical}.pill{display:inline-block;border:1px solid #2b4c61;border-radius:999px;padding:4px 9px;color:#b9d5e8;font-size:11px;margin:3px 3px 3px 0}.poi-list{display:grid;gap:9px}.poi{display:flex;gap:10px;align-items:start;padding:10px;border:1px solid #20364b;background:#0a1521;border-radius:12px}.poi b{color:var(--orange)}.poi p{margin:2px 0 0;font-size:12px;color:var(--muted)}.result{border:1px solid #24465b;background:#07141f;border-radius:12px;padding:13px;white-space:pre-wrap;overflow-wrap:anywhere;color:#cce7f9;min-height:64px}.activity-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}.activity{padding:16px;border-radius:14px;border:1px solid var(--line);background:#0a1521}.activity .emoji{font-size:25px}.activity h4{margin:8px 0 4px}.activity p{color:var(--muted);font-size:13px;margin:0 0 12px}.mission{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}.step{border:1px solid var(--line);border-radius:13px;padding:14px;background:#091521}.step.done{border-color:#32885f;background:#0b211b}.step .num{font-size:12px;color:var(--blue);font-weight:900}.step h4{margin:7px 0 5px}.step p{font-size:12px;color:var(--muted);margin:0 0 12px}.progress{height:7px;background:#1a2b3b;border-radius:9px;overflow:hidden;margin-top:13px}.progress span{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--blue),var(--green));transition:width .25s}.vr-scene{height:320px;border:1px solid var(--line);border-radius:14px;overflow:hidden;background:#07111c}.vr-scene a-scene{width:100%;height:100%}.notice{padding:12px 14px;border-left:3px solid var(--orange);background:#21190f;color:#e6c7a4;border-radius:8px;font-size:12px;margin-top:12px}.compat{display:grid;grid-template-columns:repeat(2,1fr);gap:8px}.compat div{border:1px solid var(--line);padding:10px;border-radius:10px;background:#091521;font-size:12px}.compat strong{display:block;color:var(--green);margin-bottom:3px}.footer{padding:28px 0 12px;color:#71879c;font-size:12px;text-align:center}.toast{position:fixed;bottom:18px;left:50%;transform:translateX(-50%);background:#d9fff0;color:#041b12;padding:11px 17px;border-radius:10px;font-weight:800;box-shadow:0 8px 35px #0008;z-index:99;display:none}
-@media(max-width:850px){.hero{grid-template-columns:1fr}.hero-art{min-height:230px}.viewer-panel,.side-panel{grid-column:1/-1}.activity-grid{grid-template-columns:1fr}.mission{grid-template-columns:repeat(2,1fr)}.stats{grid-template-columns:repeat(3,1fr)}}@media(max-width:480px){.wrap{padding:13px}.stats{grid-template-columns:1fr}.mission{grid-template-columns:1fr}.panel{padding:15px}.model-box model-viewer{height:320px}.compat{grid-template-columns:1fr}.brand p{letter-spacing:.08em}}
+body{background:#0a1628;color:white;font-family:sans-serif;display:flex;flex-direction:column;align-items:center;padding:20px}
+model-viewer{width:90vw;max-width:800px;height:500px;background:#111;border-radius:20px}
+input,button{padding:12px;border-radius:10px;border:none;margin:5px}
+input{width:400px;max-width:80vw}
+button{background:#7cf7a6;color:#000;font-weight:bold;cursor:pointer}
 </style>
 </head>
 <body>
-<div class="wrap">
-<header class="top">
-  <div class="brand"><div class="logo">XR</div><div><h1>XR FUSION <span style="color:var(--green)">EDU</span></h1><p>Laboratorio inmersivo · aprender explorando</p></div></div>
-  <div class="status">● SISTEMA LISTO · MODO EDUCATIVO</div>
-</header>
-<section class="hero">
-  <div class="hero-copy">
-    <div class="eyebrow">Realidad extendida para el aula</div>
-    <h2>Explora. <span>Interactúa.</span><br>Aprende diferente.</h2>
-    <p>Un espacio educativo para observar modelos 3D, preparar experiencias de realidad aumentada y explorar una escena de realidad virtual. Importa un modelo propio o empieza con las actividades del laboratorio.</p>
-    <div class="actions"><button class="btn primary" onclick="document.querySelector('#laboratorio').scrollIntoView({behavior:'smooth'})">Entrar al laboratorio ↘</button><button class="btn" onclick="document.querySelector('#misiones').scrollIntoView({behavior:'smooth'})">Ver misión educativa</button></div>
-  </div>
-  <div class="hero-art"><div class="orb"></div><div class="orb-label">Entornos · modelos · ideas</div></div>
-</section>
-<div class="stats">
-  <div class="stat"><strong>3D</strong><span>Visor interactivo de modelos</span></div>
-  <div class="stat"><strong>XR</strong><span>Herramientas inmersivas</span></div>
-  <div class="stat"><strong>4 fases</strong><span>Misión de aprendizaje</span></div>
+<h1>XR Fusion Edu - Visor PC</h1>
+<model-viewer id="viewer" camera-controls auto-rotate ar shadow-intensity="1" alt="Modelo PC"></model-viewer>
+<div style="margin-top:15px">
+<input id="modelUrl" type="text" placeholder="URL del GLB" value="https://modelviewer.dev/shared-assets/models/Astronaut.glb">
+<button id="btnCargar">Cargar</button>
 </div>
+<p id="estado">Listo para cargar</p>
 
-<div class="section-head" id="laboratorio"><div><h2>01 / Laboratorio 3D</h2><p>Importa un archivo GLB o GLTF para examinarlo desde distintos ángulos.</p></div><span class="pill">VISOR INTERACTIVO</span></div>
-<div class="grid">
-  <section class="panel viewer-panel">
-    <h3>Visor de modelos</h3><p class="muted small">Los modelos se procesan en tu navegador. Para modelos locales, selecciona un archivo .glb o .gltf.</p>
-    <div class="model-box">
-      <model-viewer id="modelViewer" camera-controls touch-action="pan-y" auto-rotate rotation-per-second="18deg" shadow-intensity="1" exposure="1" environment-image="neutral" ar ar-modes="webxr scene-viewer quick-look" alt="Modelo 3D educativo importado"></model-viewer>
-      <div class="placeholder" id="modelPlaceholder"><div><div class="cube">⬡</div><b>Tu modelo aparecerá aquí</b><p class="small">Carga un GLB desde tu dispositivo o pega una URL pública.</p></div></div>
-    </div>
-    <div class="viewer-controls">
-      <label class="btn primary" for="modelFile">＋ Importar modelo</label><input class="file-input" type="file" id="modelFile" accept=".glb,.gltf,model/gltf-binary,model/gltf+json">
-      <button class="btn" id="toggleRotate">Pausar rotación</button><button class="btn" id="resetView">Restablecer vista</button><button class="btn" id="arButton">Abrir RA</button><button class="btn" id="fullScreen">Pantalla completa</button>
-    </div>
-    <div class="field"><label for="modelUrl">O cargar desde URL pública (HTTPS)</label><div style="display:flex;gap:8px"><input id="modelUrl" type="url" placeholder="https://ejemplo.com/modelo.glb"><button class="btn" id="loadUrl">Cargar</button></div></div>
-    <p class="muted small" id="modelStatus" aria-live="polite">No hay ningún modelo cargado. Puedes probar con una URL de un modelo GLB que tengas permiso para usar.</p>
-    <div class="notice">La realidad aumentada depende del navegador, del dispositivo y de un contexto seguro (HTTPS). En algunos iPhone, la experiencia puede abrirse mediante Quick Look.</div>
-  </section>
-  <aside class="panel side-panel">
-    <h3>Ficha de exploración</h3><p class="muted small">Registra qué estás observando para convertir la exploración en aprendizaje.</p>
-    <div class="field"><label for="modelName">Nombre del modelo</label><input id="modelName" placeholder="Ej. Sistema solar"></div>
-    <div class="field"><label for="modelSource">Autor o fuente / atribución</label><input id="modelSource" placeholder="Autor, institución o enlace de origen"></div>
-    <div class="field"><label for="observation">¿Qué observas?</label><textarea id="observation" placeholder="Describe formas, partes, relaciones o preguntas..."></textarea></div>
-    <button class="btn primary" id="saveNotes">Guardar ficha en esta sesión</button>
-    <div id="notesStatus" class="result" style="margin-top:10px">Tu ficha guardada aparecerá aquí.</div>
-    <div style="margin-top:18px"><h3>Puntos de interés</h3><p class="muted small">Usa estas preguntas para orientar el análisis del modelo.</p>
-      <div class="poi-list">
-        <div class="poi"><b>01</b><div><strong>Forma y estructura</strong><p>¿Qué partes distingues y cómo se organizan?</p></div></div>
-        <div class="poi"><b>02</b><div><strong>Función</strong><p>¿Para qué sirve cada parte? ¿Cómo lo sabes?</p></div></div>
-        <div class="poi"><b>03</b><div><strong>Conexiones</strong><p>¿Qué relaciones encuentras entre sus elementos?</p></div></div>
-      </div>
-    </div>
-  </aside>
-</div>
-
-<div class="section-head" id="actividades"><div><h2>02 / Actividades educativas</h2><p>Pequeñas misiones para observar, preguntar y explicar.</p></div></div>
-<div class="activity-grid">
-  <article class="activity"><div class="emoji">🔎</div><h4>Observación guiada</h4><p>Explora el modelo y escribe tres detalles que no habías notado antes.</p><button class="btn" onclick="startActivity('Observación guiada','Explora el modelo 3D. Anota tres detalles visibles, una característica que te sorprenda y una pregunta que quieras investigar.')">Iniciar actividad</button></article>
-  <article class="activity"><div class="emoji">🧠</div><h4>Piensa y explica</h4><p>Relaciona lo que ves con un concepto de clase y explícalo con tus palabras.</p><button class="btn" onclick="startActivity('Piensa y explica','Explica con tus propias palabras qué representa el modelo, cómo funciona y qué concepto de clase ayuda a comprender. Incluye una evidencia visual.')">Iniciar actividad</button></article>
-  <article class="activity"><div class="emoji">🤝</div><h4>Aprendizaje colaborativo</h4><p>Compara tus observaciones con las de un compañero y construyan una conclusión.</p><button class="btn" onclick="startActivity('Aprendizaje colaborativo','Comparte tus observaciones con un compañero. Encuentren dos coincidencias, una diferencia de interpretación y redacten una conclusión conjunta.')">Iniciar actividad</button></article>
-</div>
-<div class="panel full" id="activityWorkspace" style="margin-top:16px;display:none">
-  <h3 id="activityTitle">Actividad</h3><p id="activityPrompt" class="muted"></p>
-  <div class="field"><label for="activityAnswer">Tu respuesta</label><textarea id="activityAnswer" placeholder="Escribe aquí tu respuesta..."></textarea></div>
-  <div class="actions"><button class="btn primary" onclick="downloadActivity()">Descargar respuesta (.txt)</button><button class="btn" onclick="document.querySelector('#activityWorkspace').style.display='none'">Cerrar actividad</button></div>
-</div>
-
-<div class="section-head" id="misiones"><div><h2>03 / Misión de cuatro etapas</h2><p>Completa cada fase para registrar tu progreso en esta sesión.</p></div><span class="pill" id="missionCount">0 de 4 completadas</span></div>
-<section class="panel">
-  <div class="mission" id="missionGrid">
-    <div class="step" data-step="0"><div class="num">ETAPA 01</div><h4>Preparar</h4><p>Define el tema que vas a investigar y carga un modelo.</p><button class="btn" onclick="completeStep(0)">Marcar lista</button></div>
-    <div class="step" data-step="1"><div class="num">ETAPA 02</div><h4>Explorar</h4><p>Gira, acerca y aleja el modelo. Observa sus detalles.</p><button class="btn" onclick="completeStep(1)">Marcar lista</button></div>
-    <div class="step" data-step="2"><div class="num">ETAPA 03</div><h4>Interpretar</h4><p>Registra tus hallazgos y relaciónalos con el tema de clase.</p><button class="btn" onclick="completeStep(2)">Marcar lista</button></div>
-    <div class="step" data-step="3"><div class="num">ETAPA 04</div><h4>Compartir</h4><p>Explica lo aprendido y comparte tus conclusiones.</p><button class="btn" onclick="completeStep(3)">Marcar lista</button></div>
-  </div>
-  <div class="progress"><span id="missionProgress"></span></div>
-</section>
-
-<div class="section-head" id="vr"><div><h2>04 / Laboratorio de realidad virtual</h2><p>Prueba una escena 3D sencilla y, si tu equipo lo permite, entra en modo inmersivo.</p></div><span class="pill">A-FRAME</span></div>
-<section class="panel">
-  <div class="vr-scene">
-    <a-scene embedded vr-mode-ui="enabled: true" renderer="colorManagement: true; antialias: true" background="color: #07111c">
-      <a-sky color="#07111c"></a-sky>
-      <a-entity position="0 1.6 -3">
-        <a-box position="-1 0 0" rotation="0 25 0" color="#39b8ff" depth="0.65" height="0.65" width="0.65" animation="property: rotation; to: 0 385 0; loop: true; dur: 9000"></a-box>
-        <a-sphere position="0.1 0.1 -0.1" radius="0.42" color="#55ffb0" animation="property: position; dir: alternate; to: 0.1 0.45 -0.1; loop: true; dur: 1800"></a-sphere>
-        <a-torus position="1.15 0.1 0" radius="0.42" radius-tubular="0.06" color="#ff9e43" rotation="35 0 0" animation="property: rotation; to: 35 360 0; loop: true; dur: 10000"></a-torus>
-        <a-text value="EXPLORA Y APRENDE" align="center" position="0 -0.85 0" color="#eaf5ff" width="5"></a-text>
-      </a-entity>
-      <a-plane rotation="-90 0 0" width="200" height="200" color="#102437" position="0 -0.15 0"></a-plane>
-      <a-entity position="0 0 4"><a-camera wasd-controls-enabled="true" look-controls="pointerLockEnabled: false"></a-camera></a-entity>
-      <a-entity light="type: ambient; intensity: 1.2"></a-entity>
-      <a-entity light="type: directional; intensity: 1.5" position="-1 3 2"></a-entity>
-    </a-scene>
-  </div>
-  <p class="muted small">En computador puedes mirar la escena y usar los controles disponibles. El modo VR requiere un visor y un navegador compatible; la disponibilidad depende del dispositivo.</p>
-</section>
-
-<div class="section-head" id="copiloto"><div><h2>05 / Copiloto pedagógico</h2><p>Genera una guía o un prompt educativo sin utilizar una API ni enviar tus datos a un servicio de IA.</p></div></div>
-<section class="panel">
-  <div class="grid">
-    <div style="grid-column:span 4">
-      <div class="field"><label for="subject">Tema o asignatura</label><input id="subject" placeholder="Ej. Sistema solar, anatomía, geometría"></div>
-      <div class="field"><label for="level">Nivel educativo</label><select id="level"><option>Primaria</option><option selected>Secundaria</option><option>Educación superior</option><option>Formación docente</option></select></div>
-      <div class="field"><label for="goal">Objetivo de aprendizaje</label><textarea id="goal" placeholder="¿Qué quieres que aprenda el estudiante?"></textarea></div>
-      <button class="btn primary" onclick="generatePrompt()">Generar guía educativa</button>
-    </div>
-    <div style="grid-column:span 8">
-      <h3>Resultado</h3><div id="promptResult" class="result">Completa los campos y genera una guía con objetivo, preguntas y actividad.</div>
-      <div class="actions"><button class="btn" onclick="copyResult()">Copiar resultado</button><button class="btn" onclick="downloadPrompt()">Descargar guía (.txt)</button></div>
-      <p class="muted small">Este copiloto usa una plantilla local. No genera respuestas con un modelo de inteligencia artificial ni necesita clave API.</p>
-    </div>
-  </div>
-</section>
-
-<div class="section-head" id="voz"><div><h2>06 / Narración por voz</h2><p>Escucha una explicación de la actividad usando la voz disponible en tu navegador.</p></div></div>
-<section class="panel">
-  <div class="field"><label for="voiceText">Texto para narrar</label><textarea id="voiceText">Bienvenido a XR Fusion Edu. Observa el modelo, explora sus partes y formula preguntas. Aprender también significa investigar, conversar y explicar lo que descubres con tus propias palabras.</textarea></div>
-  <div class="actions"><button class="btn primary" id="speakBtn">▶ Reproducir narración</button><button class="btn" id="stopSpeak">■ Detener voz</button></div>
-  <p id="voiceStatus" class="muted small">La narración depende de la compatibilidad de tu navegador.</p>
-</section>
-
-<div class="section-head" id="diagnostico"><div><h2>07 / Diagnóstico de compatibilidad</h2><p>Consulta funciones básicas detectadas en tu navegador.</p></div><button class="btn" onclick="runDiagnostics()">Volver a comprobar</button></div>
-<section class="panel"><div class="compat" id="compatResults"></div><div class="notice">La comprobación es orientativa: no puede garantizar que un visor RA/VR externo esté conectado o que todos los modelos sean compatibles. Publica la página mediante HTTPS para habilitar funciones inmersivas cuando el dispositivo las admita.</div></section>
-
-<footer class="footer">XR FUSION EDU · Proyecto educativo demostrativo · Modelos externos sujetos a sus licencias y permisos.<br>Consejo: atribuye siempre el modelo 3D a su autor y revisa sus condiciones de uso.</footer>
-</div>
-<div class="toast" id="toast" role="status"></div>
 <script>
-const viewer=document.getElementById('modelViewer');
-const placeholder=document.getElementById('modelPlaceholder');
-const modelStatus=document.getElementById('modelStatus');
-let currentObjectUrl=null, rotationOn=true, missionDone=new Set(), currentActivity='';
-function toast(msg){const t=document.getElementById('toast');t.textContent=msg;t.style.display='block';clearTimeout(window.toastTimer);window.toastTimer=setTimeout(()=>t.style.display='none',2600)}
-function setModel(src,label){viewer.src=src;placeholder.style.display='none';modelStatus.textContent='Cargando modelo: '+label;viewer.addEventListener('load',()=>{modelStatus.textContent='Modelo cargado correctamente: '+label;toast('Modelo listo para explorar')},{once:true});viewer.addEventListener('error',()=>{modelStatus.textContent='No se pudo cargar el modelo. Comprueba la URL, el formato y los permisos CORS.';placeholder.style.display='grid'},{once:true})}
-document.getElementById('modelFile').addEventListener('change',e=>{const f=e.target.files&&e.target.files[0];if(!f)return;if(!/\.(glb|gltf)$/i.test(f.name)){toast('Selecciona un archivo .glb o .gltf');return}if(currentObjectUrl)URL.revokeObjectURL(currentObjectUrl);currentObjectUrl=URL.createObjectURL(f);setModel(currentObjectUrl,f.name);document.getElementById('modelName').value=f.name});
-document.getElementById('loadUrl').addEventListener('click',()=>{const u=document.getElementById('modelUrl').value.trim();try{const p=new URL(u);if(p.protocol!=='https:'&&p.protocol!=='http:')throw Error();setModel(u,p.hostname)}catch(e){toast('Introduce una URL válida que apunte al modelo 3D')}});
-document.getElementById('toggleRotate').addEventListener('click',()=>{rotationOn=!rotationOn;viewer.autoRotate=rotationOn;document.getElementById('toggleRotate').textContent=rotationOn?'Pausar rotación':'Reanudar rotación'});
-document.getElementById('resetView').addEventListener('click',()=>{viewer.cameraOrbit='auto auto auto';viewer.cameraTarget='auto auto auto';viewer.fieldOfView='auto';viewer.autoRotate=rotationOn;toast('Vista restablecida')});
-document.getElementById('arButton').addEventListener('click',async()=>{if(!viewer.src){toast('Primero carga un modelo 3D');return}try{await viewer.activateAR()}catch(e){toast('La RA no está disponible en este dispositivo o navegador')}})
-document.getElementById('fullScreen').addEventListener('click',async()=>{const el=document.querySelector('.model-box');try{if(!document.fullscreenElement)await el.requestFullscreen();else await document.exitFullscreen()}catch(e){toast('Pantalla completa no disponible')}});
-document.getElementById('saveNotes').addEventListener('click',()=>{const name=document.getElementById('modelName').value.trim()||'Modelo sin nombre';const source=document.getElementById('modelSource').value.trim()||'Fuente no especificada';const obs=document.getElementById('observation').value.trim()||'Sin observaciones todavía';document.getElementById('notesStatus').textContent='FICHA DE EXPLORACIÓN\nModelo: '+name+'\nFuente: '+source+'\nObservaciones: '+obs;toast('Ficha guardada en esta sesión')});
-function startActivity(title,prompt){currentActivity=title;document.getElementById('activityTitle').textContent=title;document.getElementById('activityPrompt').textContent=prompt;document.getElementById('activityAnswer').value='';document.getElementById('activityWorkspace').style.display='block';document.getElementById('activityWorkspace').scrollIntoView({behavior:'smooth',block:'center'})}
-function downloadText(filename,text){const blob=new Blob([text],{type:'text/plain;charset=utf-8'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=filename;document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(a.href),1000)}
-function downloadActivity(){const answer=document.getElementById('activityAnswer').value.trim();if(!answer){toast('Escribe una respuesta antes de descargar');return}downloadText('actividad-xr-fusion.txt',currentActivity+'\n\n'+document.getElementById('activityPrompt').textContent+'\n\nRespuesta:\n'+answer)}
-function completeStep(n){if(missionDone.has(n)){missionDone.delete(n)}else missionDone.add(n);const card=document.querySelector('[data-step="'+n+'"]');card.classList.toggle('done',missionDone.has(n));card.querySelector('button').textContent=missionDone.has(n)?'✓ Completada':'Marcar lista';document.getElementById('missionCount').textContent=missionDone.size+' de 4 completadas';document.getElementById('missionProgress').style.width=(missionDone.size/4*100)+'%';if(missionDone.size===4)toast('¡Misión completada! Excelente trabajo.')}
-function generatePrompt(){const subject=document.getElementById('subject').value.trim()||'un modelo 3D educativo';const level=document.getElementById('level').value;const goal=document.getElementById('goal').value.trim()||'comprender las características principales del tema';const textOut='GUÍA PEDAGÓGICA XR FUSION EDU\n\nTema: '+subject+'\nNivel: '+level+'\nObjetivo: '+goal+'\n\nACTIVIDAD\n1. Observa el modelo 3D desde varios ángulos.\n2. Identifica tres elementos importantes y describe su función.\n3. Relaciona una observación con lo aprendido en clase.\n4. Comparte una conclusión con un compañero.\n\nPREGUNTAS ORIENTADORAS\n• ¿Qué detalles puedes observar directamente?\n• ¿Qué evidencia respalda tu explicación?\n• ¿Qué te gustaría investigar con más profundidad?\n• ¿Cómo explicarías lo aprendido con tus propias palabras?\n\nEVIDENCIA DE APRENDIZAJE\nUna breve explicación que incluya tres observaciones, una relación con el tema y una pregunta nueva.\n\nPROMPT PARA USAR EN UN ASISTENTE DE IA (opcional)\nActúa como un docente de '+level.toLowerCase()+'. Diseña una actividad segura e inclusiva sobre '+subject+'. Objetivo: '+goal+'. Incluye instrucciones claras, preguntas de pensamiento crítico, una evidencia de aprendizaje y criterios sencillos de evaluación. No inventes datos y adapta el lenguaje al nivel indicado.';document.getElementById('promptResult').textContent=textOut;toast('Guía educativa generada')}
-async function copyResult(){const text=document.getElementById('promptResult').textContent;try{await navigator.clipboard.writeText(text);toast('Resultado copiado')}catch(e){const ta=document.createElement('textarea');ta.value=text;document.body.appendChild(ta);ta.select();document.execCommand('copy');ta.remove();toast('Resultado copiado')}}
-function downloadPrompt(){downloadText('guia-pedagogica-xr-fusion.txt',document.getElementById('promptResult').textContent)}
-document.getElementById('speakBtn').addEventListener('click',()=>{if(!('speechSynthesis'in window)){document.getElementById('voiceStatus').textContent='Tu navegador no ofrece narración por voz.';return}speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(document.getElementById('voiceText').value);u.lang='es-CO';u.rate=0.95;u.onstart=()=>document.getElementById('voiceStatus').textContent='Narración en curso…';u.onend=()=>document.getElementById('voiceStatus').textContent='Narración finalizada.';speechSynthesis.speak(u)});
-document.getElementById('stopSpeak').addEventListener('click',()=>{if('speechSynthesis'in window)speechSynthesis.cancel();document.getElementById('voiceStatus').textContent='Narración detenida.'});
-function runDiagnostics(){const secure=window.isSecureContext;const checks=[['Navegador',navigator.userAgent.includes('Chrome')||navigator.userAgent.includes('Edg')?'Chrome / Edge detectado':'Navegador detectado'],['Contexto seguro',secure?'HTTPS o localhost disponible':'No seguro: usa GitHub Pages (HTTPS)'],['WebGL',(()=>{try{const c=document.createElement('canvas');return !!(c.getContext('webgl2')||c.getContext('webgl'))?'Disponible':'No detectado'}catch(e){return 'No detectado'}})()],['Narración',('speechSynthesis'in window)?'Disponible':'No disponible'],['Realidad virtual',navigator.xr?'WebXR detectado':'WebXR no detectado en este navegador'],['Pantalla táctil',('ontouchstart'in window||navigator.maxTouchPoints>0)?'Sí':'No detectada']];document.getElementById('compatResults').innerHTML=checks.map(x=>'<div><strong>'+escapeHtml(x[0])+'</strong>'+escapeHtml(x[1])+'</div>').join('')}
-function escapeHtml(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
-runDiagnostics();
-<script>
-// Carga automática del PC para todos - versión sin espacios
-window.addEventListener('load', () => {
-  const pcUrl = "https://raw.githubusercontent.com/KhronosGroup/glTF-Sample-Models/main/2.0/DamagedHelmet/glTF-Binary/DamagedHelmet.glb";
-  // este es un modelo PC gamer real de prueba, si quieres el PC completo usa esta de abajo:
-  const pcUrlReal = "https://modelviewer.dev/shared-assets/models/Astronaut.glb";
-  
-  // Intentamos todas las formas posibles de cargar
-  const viewer = document.querySelector('model-viewer');
-  const input = document.getElementById('modelUrl') || document.getElementById('modelUrl1') || document.querySelector('input[type=url]') || document.querySelector('input[type=text]');
-  
-  if(viewer) {
-    viewer.src = pcUrl;
-    console.log("PC cargado en viewer");
-  }
-  if(input) {
-    input.value = pcUrl;
-  }
-  // Si tu página tiene función de cargar, la llamamos
-  const btnCargar = document.querySelector('button');
-  // Busca el botón que dice Cargar
-  const botones = document.querySelectorAll('button');
-  botones.forEach(b => {
-    if(b.textContent.toLowerCase().includes('cargar')) {
-      b.click();
+const viewer = document.getElementById('viewer');
+const input = document.getElementById('modelUrl');
+const btn = document.getElementById('btnCargar');
+const estado = document.getElementById('estado');
+
+function cargarModelo(url){
+  if(!url) return;
+  estado.textContent = "Cargando: " + url;
+  viewer.src = url;
+  viewer.addEventListener('load', ()=>{ estado.textContent = "¡Modelo cargado!"; }, {once:true});
+  viewer.addEventListener('error', (e)=>{ estado.textContent = "Error cargando modelo. Prueba otro link."; console.error(e); }, {once:true});
+}
+
+btn.addEventListener('click', ()=>{ cargarModelo(input.value.trim()); });
+
+// Carga automática del PC
+window.addEventListener('load', ()=>{
+  const pcUrl = "https://raw.githubusercontent.com/rocksdanister/system-stats-wallpaper/main/src/Simple%20System%203D/models/pcmr.glb";
+  input.value = pcUrl;
+  cargarModelo(pcUrl);
+  // Si falla por CORS, usa el astronauta como respaldo
+  setTimeout(()=>{
+    if(!viewer.src || estado.textContent.includes("Error")){
+      cargarModelo("https://modelviewer.dev/shared-assets/models/Astronaut.glb");
     }
-  });
+  }, 3000);
 });
+</script>
 </body>
 </html>
