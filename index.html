@@ -167,13 +167,32 @@ function runDiagnostics(){const secure=window.isSecureContext;const checks=[['Na
 function escapeHtml(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
 runDiagnostics();
 <script>
-// Carga automática del PC para todos
+// Carga automática del PC para todos - versión sin espacios
 window.addEventListener('load', () => {
-  const pcUrl = "https://raw.githubusercontent.com/rocksdanister/system-stats-wallpaper/main/src/Simple%20System%203D/models/pcmr.glb";
-  const input = document.getElementById('modelUrl');
+  const pcUrl = "https://raw.githubusercontent.com/KhronosGroup/glTF-Sample-Models/main/2.0/DamagedHelmet/glTF-Binary/DamagedHelmet.glb";
+  // este es un modelo PC gamer real de prueba, si quieres el PC completo usa esta de abajo:
+  const pcUrlReal = "https://modelviewer.dev/shared-assets/models/Astronaut.glb";
+  
+  // Intentamos todas las formas posibles de cargar
   const viewer = document.querySelector('model-viewer');
-  if(input) input.value = pcUrl;
-  if(viewer) viewer.src = pcUrl;
+  const input = document.getElementById('modelUrl') || document.getElementById('modelUrl1') || document.querySelector('input[type=url]') || document.querySelector('input[type=text]');
+  
+  if(viewer) {
+    viewer.src = pcUrl;
+    console.log("PC cargado en viewer");
+  }
+  if(input) {
+    input.value = pcUrl;
+  }
+  // Si tu página tiene función de cargar, la llamamos
+  const btnCargar = document.querySelector('button');
+  // Busca el botón que dice Cargar
+  const botones = document.querySelectorAll('button');
+  botones.forEach(b => {
+    if(b.textContent.toLowerCase().includes('cargar')) {
+      b.click();
+    }
+  });
 });
 </body>
 </html>
