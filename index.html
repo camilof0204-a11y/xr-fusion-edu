@@ -166,6 +166,14 @@ document.getElementById('stopSpeak').addEventListener('click',()=>{if('speechSyn
 function runDiagnostics(){const secure=window.isSecureContext;const checks=[['Navegador',navigator.userAgent.includes('Chrome')||navigator.userAgent.includes('Edg')?'Chrome / Edge detectado':'Navegador detectado'],['Contexto seguro',secure?'HTTPS o localhost disponible':'No seguro: usa GitHub Pages (HTTPS)'],['WebGL',(()=>{try{const c=document.createElement('canvas');return !!(c.getContext('webgl2')||c.getContext('webgl'))?'Disponible':'No detectado'}catch(e){return 'No detectado'}})()],['Narración',('speechSynthesis'in window)?'Disponible':'No disponible'],['Realidad virtual',navigator.xr?'WebXR detectado':'WebXR no detectado en este navegador'],['Pantalla táctil',('ontouchstart'in window||navigator.maxTouchPoints>0)?'Sí':'No detectada']];document.getElementById('compatResults').innerHTML=checks.map(x=>'<div><strong>'+escapeHtml(x[0])+'</strong>'+escapeHtml(x[1])+'</div>').join('')}
 function escapeHtml(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
 runDiagnostics();
-</script>
+<script>
+// Carga automática del PC para todos
+window.addEventListener('load', () => {
+  const pcUrl = "https://raw.githubusercontent.com/rocksdanister/system-stats-wallpaper/main/src/Simple%20System%203D/models/pcmr.glb";
+  const input = document.getElementById('modelUrl');
+  const viewer = document.querySelector('model-viewer');
+  if(input) input.value = pcUrl;
+  if(viewer) viewer.src = pcUrl;
+});
 </body>
 </html>
